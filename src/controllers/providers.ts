@@ -70,6 +70,7 @@ export class ProviderController {
     // parse custom providers
     Object.keys(this.providerOptions)
       .filter(key => key.startsWith("custom-"))
+      .reverse()
       .map(id => {
         if (id && this.providerOptions[id]) {
           const options = this.providerOptions[id];
@@ -77,7 +78,7 @@ export class ProviderController {
             typeof options.display !== "undefined" &&
             typeof options.connector !== "undefined"
           ) {
-            this.providers.push({
+            this.providers.unshift({
               ...list.providers.FALLBACK,
               id,
               ...options.display,
